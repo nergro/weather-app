@@ -1,20 +1,4 @@
-Weather app
-====================================
-Single page application made with React, TypeScript, SCSS
-### Getting up & running
-
-Both the server and client need to be installed and started.
-
-##### Using npm
-
-1) `npm install`
-2) `npm start`
-
-##### Using yarn
-
-1) `yarn install`
-2) `yarn start`
-
+# Front-end Software Engineer Challenge (Weather App)
 
 **Project target:** Create a single page application (SPA) according to the functional and technical requirements.
 
