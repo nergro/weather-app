@@ -1,0 +1,35 @@
+.header {
+  width: 100%;
+  height: 50px;
+  background: #21697C;
+  box-shadow: 0px 10px 16px -3px rgba(0,0,0,0.38);
+}
+
+.linkList {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__item {
+    width: 100px;
+    &--link {
+      display: block;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      text-decoration: none;
+      color: #FFFFFF;
+      font-weight: 500;
+      padding: 5px 0;
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: #da3743;
+      }
+    }
+  }
+}

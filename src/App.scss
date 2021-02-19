@@ -1,4 +1,5 @@
-@import './components/Organisms/index.scss';
+@import './components/index.scss';
+@import './pages/index.scss';
 
 html {
   font-family: 'Roboto', sans-serif;
@@ -16,14 +17,4 @@ body {
 
 html, body, #root {
   height: 100%
-}
-
-.App {
-  background-image: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url('./assets/morning.jpg');
-  height: 100%;
-  width: 100%;
-  background-size: cover;
-  display: flex;
-  justify-content: center;
-  padding: 100px 0 0 0;
 }

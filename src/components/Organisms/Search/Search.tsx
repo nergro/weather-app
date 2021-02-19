@@ -1,54 +1,46 @@
 import React, { FC, useState, useRef } from 'react';
-import { ReactComponent as SearchSVG } from 'assets/icons/search.svg';
-import cityList from '../../../data/countries.min.json';
 import { debounce } from 'lodash';
+import Select from 'react-select';
+import { SelectOption } from 'types/SelectOption';
+import { Country } from 'types/Country';
+import { mapToSelectOptions } from 'services/mapToSelectOptions';
 
-export const Search: FC = () => {
+interface Props {
+  countries: Country[];
+}
+
+export const Search: FC<Props> = ({ countries }) => {
   const [searchValue, setSearchValue] = useState<string>('');
-  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [suggestions, setSuggestions] = useState<SelectOption[]>(
+    mapToSelectOptions(countries.map((x) => x.country))
+  );
 
   const getSuggestions = (value: string): void => {
     if (value.length > 2) {
-      const cities = Object.keys(cityList).filter((key) =>
-        key.toLowerCase().includes(value.toLowerCase())
-      );
-      setSuggestions(cities);
-    } else {
-      setSuggestions([]);
+      const filteredCountries = countries
+        .filter((x) => x.country.toLowerCase().includes(value.toLowerCase()))
+        .map((x) => x.country);
+
+      setSuggestions(mapToSelectOptions(filteredCountries));
     }
   };
 
   const debouncedSave = useRef(debounce((nextValue) => getSuggestions(nextValue), 1000)).current;
 
   const handleChange = (value: string): void => {
-    // const debouncedSave = debounce(() => getSuggestions(value), 1000);
     debouncedSave(value);
     setSearchValue(value);
   };
 
   return (
     <div className="searchContainer">
-      <div className="search">
-        <SearchSVG className="search__icon" />
-        <input
-          type="text"
-          className="search__input"
-          placeholder="Type a location"
-          value={searchValue}
-          onChange={(e) => handleChange(e.target.value)}
-        />
-      </div>
-      <ul
-        className={`suggestions ${
-          suggestions.length > 0 ? 'suggestions--show' : 'suggestions--hide'
-        }`}
-      >
-        {suggestions.map((x) => (
-          <li key={x} className="suggestion">
-            {x}
-          </li>
-        ))}
-      </ul>
+      <Select
+        options={suggestions}
+        classNamePrefix="searchInput"
+        className="searchInput"
+        placeholder="Type a location"
+        onInputChange={(value) => handleChange(value)}
+      />
     </div>
   );
 };
