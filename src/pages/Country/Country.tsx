@@ -5,8 +5,9 @@ import { isLoading } from 'store/types';
 import { groupDataAlphabetically } from 'services/groupDataAlphabetically';
 import { DataGroup } from 'components/Molecules/DataGroup/DataGroup';
 import { alphabet } from 'services/alphabet';
+import { RouteComponentProps } from 'react-router-dom';
 
-export const Countries: FC = () => {
+export const Country: FC<RouteComponentProps<{ countryName: string }>> = ({ match }) => {
   const countries = useCountriesResource();
 
   if (isLoading(countries)) {
@@ -17,14 +18,20 @@ export const Countries: FC = () => {
     return <div className="App">Error...</div>;
   }
 
-  const grouped = groupDataAlphabetically(countries.map((x) => x.country));
+  const country = countries.find((x) => x.country === match.params.countryName);
+
+  if (!country) {
+    return <div className="App">Country not find</div>;
+  }
+
+  const grouped = groupDataAlphabetically(country.cities);
 
   return (
     <div className="countriesContainer">
-      <h1>Search by country</h1>
+      <h1>{country.country}</h1>
       <div className="countries">
         {alphabet.map((letter) => (
-          <DataGroup key={letter} data={grouped[letter]} path="/countries" />
+          <DataGroup key={letter} data={grouped[letter]} />
         ))}
       </div>
     </div>

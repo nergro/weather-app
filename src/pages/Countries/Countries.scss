@@ -1,0 +1,14 @@
+.countriesContainer {
+  padding: 10px 0 0;
+
+  &>h1 {
+    color: #FFFFFF;
+    text-align: center;
+  }
+}
+
+.countries {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 5%; 
+}
