@@ -8,6 +8,7 @@ import { useCurrentLocation } from 'services/useCurrentLocation';
 import { Weather } from 'types/Weather';
 import { RouteComponentProps } from 'react-router-dom';
 import { isHomeLocationState } from 'types/HomeLocationState';
+import { WeatherInfo } from 'components/Organisms/WeatherInfo/WeatherInfo';
 
 export const Home: FC<RouteComponentProps> = ({ location }) => {
   const countries = useCountriesResource();
@@ -36,8 +37,11 @@ export const Home: FC<RouteComponentProps> = ({ location }) => {
   return (
     <div className="homeContainer">
       <Search countries={countries} />
-      <img src="http://openweathermap.org/img/wn/04d@4x.png" />
-      <p>City: {weatherData.name}</p>
+      <WeatherInfo data={weatherData} />
+      <WeatherInfo data={weatherData} />
+      <WeatherInfo data={weatherData} />
+      <WeatherInfo data={weatherData} />
+      <WeatherInfo data={weatherData} />
     </div>
   );
 };
