@@ -25,5 +25,5 @@ export const Country: FC<RouteComponentProps<{ countryName: string }>> = ({ matc
 
   const grouped = groupDataAlphabetically(country.cities);
 
-  return <AlphabetizedList title={country.country} data={grouped} path="/" exactPath />;
+  return <AlphabetizedList title={country.country} data={grouped} path="/weather" />;
 };

@@ -1,5 +1,5 @@
 import { getWeatherDataByCity, getWeatherDataByCoordinates } from 'apiServices/weather/weather';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { newStoreError } from 'store/storeError';
 import { Dispatch, Loading, Resource } from 'store/types';
 import { Coordinates } from 'types/Coordinates';
@@ -23,33 +23,11 @@ export const useDispatch = (): Dispatch<Action> => {
   return dispatch;
 };
 
-interface WeatherResource {
-  getWeatherByCity: (city: string) => Resource<Weather>;
+export const useWeatherResource = (): {
   getWeatherByCoordinates: (coord: Coordinates) => Resource<Weather>;
-}
-
-export const useWeatherResource = (): WeatherResource => {
+} => {
   const state = useState();
   const dispatch = useDispatch();
-
-  const getWeatherByCity = useCallback(
-    (city: string) => {
-      if (!state[city]) {
-        dispatch({ type: 'Weather/SingleLoadInitiated', payload: { id: city } });
-        getWeatherDataByCity(city)
-          .then((data) => dispatch({ type: 'Weather/SingleLoaded', payload: { id: city, data } }))
-          .catch((err) => {
-            dispatch({
-              type: 'Weather/SingleLoadFailed',
-              payload: { id: city, error: newStoreError(err.message, err.code) },
-            });
-          });
-      }
-      return state[city] || Loading;
-    },
-    [state, dispatch]
-  );
-
   const getWeatherByCoordinates = useCallback(
     (coord: Coordinates) => {
       const locationId = `${coord.lat}${coord.lon}`;
@@ -72,5 +50,26 @@ export const useWeatherResource = (): WeatherResource => {
     [state, dispatch]
   );
 
-  return { getWeatherByCity, getWeatherByCoordinates };
+  return { getWeatherByCoordinates };
+};
+
+export const useWeatherByCityResource = (city: string): Resource<Weather> => {
+  const state = useState();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!state[city]) {
+      dispatch({ type: 'Weather/SingleLoadInitiated', payload: { id: city } });
+      getWeatherDataByCity(city)
+        .then((data) => dispatch({ type: 'Weather/SingleLoaded', payload: { id: city, data } }))
+        .catch((err) => {
+          dispatch({
+            type: 'Weather/SingleLoadFailed',
+            payload: { id: city, error: newStoreError(err.message, err.code) },
+          });
+        });
+    }
+  }, [state, dispatch, city]);
+
+  return state[city] || Loading;
 };

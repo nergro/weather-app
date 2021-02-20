@@ -1,18 +1,35 @@
 import { CurrentDate } from 'components/Molecules/CurrentDate/CurrentDate';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { getWeatherIconUrl } from 'services/getWeatherIconUrl';
 import { Weather } from 'types/Weather';
+import { ReactComponent as HeartSvg } from 'assets/icons/heart.svg';
+import { updateFavoriteCities, isCityInFavorites } from 'services/localStorage';
 
 interface Props {
   data: Weather;
 }
 
 export const WeatherInfo: FC<Props> = ({ data }) => {
+  const [isFavorite, setIsFavorite] = useState<boolean>(isCityInFavorites(data.name));
   const weatherIconData = data.weather[0];
+
+  const onHeartClick = (): void => {
+    updateFavoriteCities(data.name);
+    setIsFavorite(!isFavorite);
+  };
+
   return (
     <div className="weatherInfoContainer">
       <div className="weatherlocation">
-        <p className="weatherlocationName">{data.name}</p>
+        <div className="weatherlocationName">
+          <p>{data.name}</p>
+          <HeartSvg
+            className={`weatherlocationName--heartIcon ${
+              isFavorite && 'weatherlocationName--heartIcon__fill'
+            }`}
+            onClick={onHeartClick}
+          />
+        </div>
         <CurrentDate timezone={data.timezone} />
       </div>
       <div className="weather">

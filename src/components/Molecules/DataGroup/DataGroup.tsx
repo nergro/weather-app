@@ -5,10 +5,9 @@ import { DataGroup as DataGroupType } from 'services/groupDataAlphabetically';
 interface Props {
   data: DataGroupType;
   path: string;
-  exactPath?: boolean;
 }
 
-export const DataGroup: FC<Props> = ({ data, path, exactPath }) => {
+export const DataGroup: FC<Props> = ({ data, path }) => {
   if (!data || data.children.length === 0) {
     return null;
   }
@@ -19,14 +18,7 @@ export const DataGroup: FC<Props> = ({ data, path, exactPath }) => {
       <ul className="dataGroupList">
         {data.children.map((x) => (
           <li key={x} className="dataGroupListItem">
-            <Link
-              to={{
-                pathname: exactPath ? path : `${path}/${x}`,
-                state: { item: x },
-              }}
-            >
-              {x}
-            </Link>
+            <Link to={`${path}/${x}`}>{x}</Link>
           </li>
         ))}
       </ul>
