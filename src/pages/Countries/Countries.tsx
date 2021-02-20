@@ -3,8 +3,7 @@ import { useCountriesResource } from 'store/countriesStore/hooks';
 import { isStoreError } from 'store/storeError';
 import { isLoading } from 'store/types';
 import { groupDataAlphabetically } from 'services/groupDataAlphabetically';
-import { DataGroup } from 'components/Molecules/DataGroup/DataGroup';
-import { alphabet } from 'services/alphabet';
+import { AlphabetizedList } from 'components/Molecules/AlphabetizedList/AlphabetizedList';
 
 export const Countries: FC = () => {
   const countries = useCountriesResource();
@@ -19,14 +18,5 @@ export const Countries: FC = () => {
 
   const grouped = groupDataAlphabetically(countries.map((x) => x.country));
 
-  return (
-    <div className="countriesContainer">
-      <h1>Search by country</h1>
-      <div className="countries">
-        {alphabet.map((letter) => (
-          <DataGroup key={letter} data={grouped[letter]} path="/countries" />
-        ))}
-      </div>
-    </div>
-  );
+  return <AlphabetizedList title="Search by country" data={grouped} path="/countries" />;
 };

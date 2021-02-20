@@ -1,4 +1,4 @@
-.countriesContainer {
+.alphabetizedListContainer {
   padding: 10px 0 0;
 
   &>h1 {
@@ -7,7 +7,7 @@
   }
 }
 
-.countries {
+.alphabetizedList {
   display: flex;
   flex-direction: column;
   padding: 30px 5%; 

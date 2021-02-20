@@ -9,7 +9,7 @@ import { Action, CountriesDispatchContext, CountriesStateContext, State } from '
 export const useState = (): State => {
   const state = React.useContext(CountriesStateContext);
   if (state === undefined) {
-    throw new Error('Coutnries state is not initialized');
+    throw new Error('Countries store is not initialized');
   }
   return state;
 };
@@ -17,7 +17,7 @@ export const useState = (): State => {
 export const useDispatch = (): Dispatch<Action> => {
   const dispatch = React.useContext(CountriesDispatchContext);
   if (dispatch === undefined) {
-    throw new Error('Coutnries state is not initialized');
+    throw new Error('Countries store is not initialized');
   }
   return dispatch;
 };
