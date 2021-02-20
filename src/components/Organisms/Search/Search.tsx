@@ -3,33 +3,34 @@ import { debounce } from 'lodash';
 import Select from 'react-select';
 import { SelectOption } from 'types/SelectOption';
 import { Country } from 'types/Country';
-import { mapToSelectOptions } from 'services/mapToSelectOptions';
+import { getCities } from 'services/getFilteredCities';
 
 interface Props {
   countries: Country[];
+  onChange: (city: string) => void;
 }
 
-export const Search: FC<Props> = ({ countries }) => {
-  const [searchValue, setSearchValue] = useState<string>('');
-  const [suggestions, setSuggestions] = useState<SelectOption[]>(
-    mapToSelectOptions(countries.map((x) => x.country))
-  );
+export const Search: FC<Props> = ({ countries, onChange }) => {
+  const [suggestions, setSuggestions] = useState<SelectOption[]>();
 
   const getSuggestions = (value: string): void => {
-    if (value.length > 2) {
-      const filteredCountries = countries
-        .filter((x) => x.country.toLowerCase().includes(value.toLowerCase()))
-        .map((x) => x.country);
+    if (value.length > 3) {
+      const cities = getCities(countries, value);
 
-      setSuggestions(mapToSelectOptions(filteredCountries));
+      setSuggestions(cities);
     }
   };
 
-  const debouncedSave = useRef(debounce((nextValue) => getSuggestions(nextValue), 1000)).current;
+  const debouncedSave = useRef(debounce((nextValue) => getSuggestions(nextValue), 400)).current;
 
-  const handleChange = (value: string): void => {
+  const onInputChange = (value: string): void => {
     debouncedSave(value);
-    setSearchValue(value);
+  };
+
+  const handleChange = (option: SelectOption | null): void => {
+    if (option) {
+      onChange(option.value);
+    }
   };
 
   return (
@@ -39,7 +40,11 @@ export const Search: FC<Props> = ({ countries }) => {
         classNamePrefix="searchInput"
         className="searchInput"
         placeholder="Type a location"
-        onInputChange={(value) => handleChange(value)}
+        onChange={handleChange}
+        onInputChange={(value) => onInputChange(value)}
+        openMenuOnFocus={false}
+        openMenuOnClick={false}
+        components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
       />
     </div>
   );

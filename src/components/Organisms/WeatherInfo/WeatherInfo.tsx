@@ -24,11 +24,15 @@ export const WeatherInfo: FC<Props> = ({ data }) => {
           </p>
         </div>
         <div className="weather__temperature">
-          <p>{data.main.temp} C</p>
+          <p>{data.main.temp} &#8451;</p>
         </div>
         <div className="weather__info">
           <p className="weather__info--row">
-            <span>Temperature:</span> {data.main.temp} C
+            <span>Feels like:</span> {data.main.feels_like} &#8451;
+          </p>
+          <p className="weather__info--row">
+            <span>Min / Max:</span> {Math.round(data.main.temp_min)} /{' '}
+            {Math.round(data.main.temp_max)} &#8451;
           </p>
           <p className="weather__info--row">
             <span>Air pressure:</span> {data.main.pressure} mbar

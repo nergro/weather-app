@@ -11,20 +11,22 @@ import { isHomeLocationState } from 'types/HomeLocationState';
 import { WeatherInfo } from 'components/Organisms/WeatherInfo/WeatherInfo';
 
 export const Home: FC<RouteComponentProps> = ({ location }) => {
+  const [city, setCity] = useState<string>(
+    isHomeLocationState(location.state) ? location.state.item : ''
+  );
+
   const countries = useCountriesResource();
   const coordinates = useCurrentLocation();
   const { getWeatherByCity, getWeatherByCoordinates } = useWeatherResource();
   const [weatherData, setWeatherData] = useState<Resource<Weather>>();
 
-  const passedCity = isHomeLocationState(location.state) ? location.state.item : undefined;
-
   useEffect(() => {
-    if (passedCity) {
-      setWeatherData(getWeatherByCity(passedCity));
+    if (city) {
+      setWeatherData(getWeatherByCity(city));
     } else if (coordinates && coordinates !== 'error') {
       setWeatherData(getWeatherByCoordinates(coordinates));
     }
-  }, [coordinates, getWeatherByCity, getWeatherByCoordinates, passedCity]);
+  }, [coordinates, getWeatherByCity, getWeatherByCoordinates, city]);
 
   if (isLoading(countries) || isLoading(weatherData)) {
     return <div className="App">Loading...</div>;
@@ -36,11 +38,7 @@ export const Home: FC<RouteComponentProps> = ({ location }) => {
 
   return (
     <div className="homeContainer">
-      <Search countries={countries} />
-      <WeatherInfo data={weatherData} />
-      <WeatherInfo data={weatherData} />
-      <WeatherInfo data={weatherData} />
-      <WeatherInfo data={weatherData} />
+      <Search countries={countries} onChange={(city) => setCity(city)} />
       <WeatherInfo data={weatherData} />
     </div>
   );
