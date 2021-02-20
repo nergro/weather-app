@@ -1,0 +1,116 @@
+
+$spinnerColor: rgb(20, 6, 223);
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 70px;
+  width: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  &__dots {
+    height: calc(70px / 7);
+    width: calc(70px / 7);
+
+    &--big {
+      background: $spinnerColor;
+      height: 100%;
+      width: 100%;
+      padding: 10%;
+      border-radius: 50%;
+      animation: bigger-dot-animation 2.5s 0s infinite both;
+    }
+
+    &--small {
+      background: $spinnerColor;
+      height: 100%;
+      width: 100%;
+      border-radius: 50%;
+      animation: smaller-dot-animation 2.5s 0s infinite both;
+    }
+  }
+  
+  
+}
+
+
+
+@keyframes bigger-dot-animation {
+  0%, 100% {
+    box-shadow: $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px;
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  25%, 75% {
+    box-shadow: $spinnerColor 26px 0px 0px,
+    $spinnerColor -26px 0px 0px,
+    $spinnerColor 0px 26px 0px,
+    $spinnerColor 0px -26px 0px,
+    $spinnerColor 19px -19px 0px,
+    $spinnerColor 19px 19px 0px,
+    $spinnerColor -19px -19px 0px,
+    $spinnerColor -19px 19px 0px;
+  }
+
+  100% {
+    transform: rotate(360deg);
+    box-shadow: $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px;
+  }
+}
+
+@keyframes smaller-dot-animation {
+  0%, 100% {
+    box-shadow: $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px;
+  }
+
+  25%, 75% {
+    box-shadow: $spinnerColor 14px 0px 0px,
+    $spinnerColor -14px 0px 0px,
+    $spinnerColor 0px 14px 0px,
+    $spinnerColor 0px -14px 0px,
+    $spinnerColor 10px -10px 0px,
+    $spinnerColor 10px 10px 0px,
+    $spinnerColor -10px -10px 0px,
+    $spinnerColor -10px 10px 0px;
+  }
+
+  100% {
+    box-shadow: $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px,
+    $spinnerColor 0px 0px 0px;
+  }
+}

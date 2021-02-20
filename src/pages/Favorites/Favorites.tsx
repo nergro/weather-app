@@ -25,7 +25,7 @@ export const Favorites: FC = () => {
             ))}
           </ul>
         ) : (
-          <p>List is empty</p>
+          <p className="favoritesList__emptyLabel">List is empty</p>
         )}
       </div>
     </div>

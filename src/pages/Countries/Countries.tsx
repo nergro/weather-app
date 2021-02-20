@@ -4,12 +4,17 @@ import { isStoreError } from 'store/storeError';
 import { isLoading } from 'store/types';
 import { groupDataAlphabetically } from 'services/groupDataAlphabetically';
 import { AlphabetizedList } from 'components/Molecules/AlphabetizedList/AlphabetizedList';
+import { Spinner } from 'components/Atoms/Spinner/Spinner';
 
 export const Countries: FC = () => {
   const countries = useCountriesResource();
 
   if (isLoading(countries)) {
-    return <div className="App">Loading...</div>;
+    return (
+      <div className="App">
+        <Spinner />
+      </div>
+    );
   }
 
   if (isStoreError(countries)) {

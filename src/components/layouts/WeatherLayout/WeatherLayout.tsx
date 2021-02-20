@@ -6,6 +6,7 @@ import { isStoreError } from 'store/storeError';
 import { isLoading, Resource } from 'store/types';
 import { Country } from 'types/Country';
 import { Weather } from 'types/Weather';
+import { Spinner } from 'components/Atoms/Spinner/Spinner';
 
 interface Props {
   countries: Resource<Country[]>;
@@ -15,18 +16,31 @@ interface Props {
 export const WeatherLayout: FC<Props> = ({ countries, weatherData }) => {
   const { push } = useHistory();
 
-  if (isLoading(countries) || isLoading(weatherData)) {
-    return <div className="App">Loading...</div>;
+  if (isLoading(countries)) {
+    return (
+      <div className="App">
+        <Spinner />
+      </div>
+    );
   }
 
-  if (isStoreError(countries) || isStoreError(weatherData) || !weatherData) {
+  if (isStoreError(countries) || isStoreError(weatherData)) {
     return <div className="App">Error...</div>;
+  }
+
+  if (isLoading(weatherData)) {
+    return (
+      <div className="weatherLayout">
+        <Search countries={countries} onChange={(option) => push(`/weather/${option}`)} />
+        <Spinner />
+      </div>
+    );
   }
 
   return (
     <div className="weatherLayout">
       <Search countries={countries} onChange={(option) => push(`/weather/${option}`)} />
-      <WeatherInfo data={weatherData} />
+      {weatherData && <WeatherInfo data={weatherData} />}
     </div>
   );
 };
