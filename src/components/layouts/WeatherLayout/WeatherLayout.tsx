@@ -9,6 +9,7 @@ import { Weather } from 'types/Weather';
 import { Spinner } from 'components/Atoms/Spinner/Spinner';
 import { WeatherMap } from 'components/Organisms/WeatherMap/WeatherMap';
 import { Coordinates } from 'types/Coordinates';
+import { ErrorLayout } from '../ErrorLayout/ErrorLayout';
 interface Props {
   countries: Resource<Country[]>;
   weatherData: Resource<Weather> | undefined;
@@ -26,8 +27,13 @@ export const WeatherLayout: FC<Props> = ({ countries, weatherData, currentLocati
     );
   }
 
-  if (isStoreError(countries) || isStoreError(weatherData)) {
-    return <div className="App">Error...</div>;
+  if (isStoreError(countries)) {
+    return <ErrorLayout />;
+  }
+
+  if (isStoreError(weatherData)) {
+    console.log(weatherData);
+    return <ErrorLayout message={weatherData.code === 404 ? 'We could not find this city' : ''} />;
   }
 
   if (isLoading(weatherData)) {

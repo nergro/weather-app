@@ -41,7 +41,7 @@ export const useWeatherResource = (): {
           .catch((err) => {
             dispatch({
               type: 'Weather/SingleLoadFailed',
-              payload: { id: locationId, error: newStoreError(err.message, err.code) },
+              payload: { id: locationId, error: newStoreError(err.message, err.response.status) },
             });
           });
       }
@@ -65,7 +65,7 @@ export const useWeatherByCityResource = (city: string): Resource<Weather> => {
         .catch((err) => {
           dispatch({
             type: 'Weather/SingleLoadFailed',
-            payload: { id: city, error: newStoreError(err.message, err.code) },
+            payload: { id: city, error: newStoreError(err.message, err.response.status) },
           });
         });
     }

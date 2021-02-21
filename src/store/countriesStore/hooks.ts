@@ -33,7 +33,7 @@ export const useCountriesResource = (): Resource<Country[]> => {
         .catch((err) =>
           dispatch({
             type: 'Countries/LoadFailed',
-            payload: newStoreError(err.message, err.code),
+            payload: newStoreError(err.message, err.response.status),
           })
         );
     }

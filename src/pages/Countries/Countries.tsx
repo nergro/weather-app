@@ -5,6 +5,7 @@ import { isLoading } from 'store/types';
 import { groupDataAlphabetically } from 'services/groupDataAlphabetically';
 import { AlphabetizedList } from 'components/Molecules/AlphabetizedList/AlphabetizedList';
 import { Spinner } from 'components/Atoms/Spinner/Spinner';
+import { ErrorLayout } from 'components/layouts/ErrorLayout/ErrorLayout';
 
 export const Countries: FC = () => {
   const countries = useCountriesResource();
@@ -18,7 +19,7 @@ export const Countries: FC = () => {
   }
 
   if (isStoreError(countries)) {
-    return <div className="App">Error...</div>;
+    return <ErrorLayout />;
   }
 
   const grouped = groupDataAlphabetically(countries.map((x) => x.country));

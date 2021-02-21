@@ -6,6 +6,7 @@ import { groupDataAlphabetically } from 'services/groupDataAlphabetically';
 import { RouteComponentProps } from 'react-router-dom';
 import { AlphabetizedList } from 'components/Molecules/AlphabetizedList/AlphabetizedList';
 import { Spinner } from 'components/Atoms/Spinner/Spinner';
+import { ErrorLayout } from 'components/layouts/ErrorLayout/ErrorLayout';
 
 export const Country: FC<RouteComponentProps<{ countryName: string }>> = ({ match }) => {
   const countries = useCountriesResource();
@@ -19,13 +20,13 @@ export const Country: FC<RouteComponentProps<{ countryName: string }>> = ({ matc
   }
 
   if (isStoreError(countries)) {
-    return <div className="App">Error...</div>;
+    return <ErrorLayout />;
   }
 
   const country = countries.find((x) => x.country === match.params.countryName);
 
   if (!country) {
-    return <div className="App">Country not find</div>;
+    return <ErrorLayout message="We could not find this country" />;
   }
 
   const grouped = groupDataAlphabetically(country.cities);
