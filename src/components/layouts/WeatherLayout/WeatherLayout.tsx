@@ -32,7 +32,6 @@ export const WeatherLayout: FC<Props> = ({ countries, weatherData, currentLocati
   }
 
   if (isStoreError(weatherData)) {
-    console.log(weatherData);
     return <ErrorLayout message={weatherData.code === 404 ? 'We could not find this city' : ''} />;
   }
 
