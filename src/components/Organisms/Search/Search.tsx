@@ -21,10 +21,11 @@ export const Search: FC<Props> = ({ countries, onChange }) => {
     }
   };
 
-  const debouncedSave = useRef(debounce((nextValue) => getSuggestions(nextValue), 400)).current;
+  const debouncedSuggestions = useRef(debounce((nextValue) => getSuggestions(nextValue), 400))
+    .current;
 
   const onInputChange = (value: string): void => {
-    debouncedSave(value);
+    debouncedSuggestions(value);
   };
 
   const handleChange = (option: SelectOption | null): void => {

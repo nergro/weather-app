@@ -13,17 +13,13 @@ const Home: FC = () => {
   const [weatherData, setWeatherData] = useState<Resource<Weather>>();
 
   useEffect(() => {
-    if (coordinates && coordinates !== 'error') {
+    if (coordinates) {
       setWeatherData(getWeatherByCoordinates(coordinates));
     }
   }, [coordinates, getWeatherByCoordinates]);
 
   return (
-    <WeatherLayout
-      countries={countries}
-      weatherData={weatherData}
-      currentLocation={coordinates !== 'error' ? coordinates : undefined}
-    />
+    <WeatherLayout countries={countries} weatherData={weatherData} currentLocation={coordinates} />
   );
 };
 

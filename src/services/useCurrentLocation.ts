@@ -5,8 +5,8 @@ const geolocationOptions = {
   timeout: 1000 * 60 * 1,
 };
 
-export const useCurrentLocation = (): Coordinates | 'error' | undefined => {
-  const [coordinates, setCoordinates] = useState<Coordinates | 'error'>();
+export const useCurrentLocation = (): Coordinates | undefined => {
+  const [coordinates, setCoordinates] = useState<Coordinates>();
 
   useEffect(() => {
     if (!coordinates) {
@@ -17,9 +17,7 @@ export const useCurrentLocation = (): Coordinates | 'error' | undefined => {
             lon: position.coords.longitude,
           });
         },
-        () => {
-          setCoordinates('error');
-        },
+        () => setCoordinates(undefined),
         geolocationOptions
       );
     }

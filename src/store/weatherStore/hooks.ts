@@ -28,6 +28,7 @@ export const useWeatherResource = (): {
 } => {
   const state = useState();
   const dispatch = useDispatch();
+
   const getWeatherByCoordinates = useCallback(
     (coord: Coordinates) => {
       const locationId = `${coord.lat}${coord.lon}`;

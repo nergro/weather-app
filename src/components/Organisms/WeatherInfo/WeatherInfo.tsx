@@ -1,37 +1,30 @@
-import { CurrentDate } from 'components/Molecules/CurrentDate/CurrentDate';
-import React, { FC, useState } from 'react';
+import { WeatherLocation } from 'components/Molecules/WeatherLocation/WeatherLocation';
+import React, { FC } from 'react';
 import { getWeatherIconUrl } from 'services/getWeatherIconUrl';
 import { Weather } from 'types/Weather';
-import { ReactComponent as HeartSvg } from 'assets/icons/heart.svg';
-import { updateFavoriteCities, isCityInFavorites } from 'services/localStorage';
 
 interface Props {
   data: Weather;
 }
 
 export const WeatherInfo: FC<Props> = ({ data }) => {
-  const [isFavorite, setIsFavorite] = useState<boolean>(isCityInFavorites(data.name));
   const weatherIconData = data.weather[0];
 
-  const onHeartClick = (): void => {
-    updateFavoriteCities(data.name);
-    setIsFavorite(!isFavorite);
-  };
+  const weatherDetails = [
+    { name: 'Feels like', value: Math.round(data.main.feels_like), units: '℃' },
+    {
+      name: 'Min / Max',
+      value: `${Math.round(data.main.temp_min)} / ${Math.round(data.main.temp_max)}`,
+      units: '℃',
+    },
+    { name: 'Air pressure', value: data.main.pressure, units: 'mbar' },
+    { name: 'Humidity', value: data.main.humidity, units: '%' },
+    { name: 'Average wind speed', value: data.wind.speed, units: 'm/s' },
+  ];
 
   return (
     <div className="weatherInfoContainer">
-      <div className="weatherlocation">
-        <div className="weatherlocationName">
-          <p>{data.name}</p>
-          <HeartSvg
-            className={`weatherlocationName--heartIcon ${
-              isFavorite && 'weatherlocationName--heartIcon__fill'
-            }`}
-            onClick={onHeartClick}
-          />
-        </div>
-        <CurrentDate timezone={data.timezone} />
-      </div>
+      <WeatherLocation name={data.name} timezone={data.timezone} />
       <div className="weather">
         <div className="weather__imageContainer">
           <img src={getWeatherIconUrl(weatherIconData.icon)} />
@@ -41,25 +34,14 @@ export const WeatherInfo: FC<Props> = ({ data }) => {
           </p>
         </div>
         <div className="weather__temperature">
-          <p>{data.main.temp} &#8451;</p>
+          <p>{Math.round(data.main.temp)} &#8451;</p>
         </div>
         <div className="weather__info">
-          <p className="weather__info--row">
-            <span>Feels like:</span> {data.main.feels_like} &#8451;
-          </p>
-          <p className="weather__info--row">
-            <span>Min / Max:</span> {Math.round(data.main.temp_min)} /{' '}
-            {Math.round(data.main.temp_max)} &#8451;
-          </p>
-          <p className="weather__info--row">
-            <span>Air pressure:</span> {data.main.pressure} mbar
-          </p>
-          <p className="weather__info--row">
-            <span>Humidity:</span> {data.main.humidity} %
-          </p>
-          <p className="weather__info--row">
-            <span>Average wind speed:</span> {data.wind.speed} m/s
-          </p>
+          {weatherDetails.map((x) => (
+            <p key={x.name} className="weather__info--row">
+              <span>{x.name}:</span> {x.value} {x.units}
+            </p>
+          ))}
         </div>
       </div>
     </div>
