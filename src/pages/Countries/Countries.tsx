@@ -7,7 +7,7 @@ import { AlphabetizedList } from 'components/Molecules/AlphabetizedList/Alphabet
 import { Spinner } from 'components/Atoms/Spinner/Spinner';
 import { ErrorLayout } from 'components/layouts/ErrorLayout/ErrorLayout';
 
-export const Countries: FC = () => {
+const Countries: FC = () => {
   const countries = useCountriesResource();
 
   if (isLoading(countries)) {
@@ -26,3 +26,5 @@ export const Countries: FC = () => {
 
   return <AlphabetizedList title="Search by country" data={grouped} path="/countries" />;
 };
+
+export default Countries;

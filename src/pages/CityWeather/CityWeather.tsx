@@ -4,7 +4,7 @@ import { Redirect, RouteComponentProps } from 'react-router-dom';
 import { useCountriesResource } from 'store/countriesStore/hooks';
 import { useWeatherByCityResource } from 'store/weatherStore/hooks';
 
-export const CityWeather: FC<RouteComponentProps<{ cityName: string }>> = ({ match }) => {
+const CityWeather: FC<RouteComponentProps<{ cityName: string }>> = ({ match }) => {
   const cityName = match.params.cityName;
 
   const countries = useCountriesResource();
@@ -16,3 +16,5 @@ export const CityWeather: FC<RouteComponentProps<{ cityName: string }>> = ({ mat
 
   return <WeatherLayout countries={countries} weatherData={weatherData} />;
 };
+
+export default CityWeather;

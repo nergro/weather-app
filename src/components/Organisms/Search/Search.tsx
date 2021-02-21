@@ -1,5 +1,5 @@
 import React, { FC, useState, useRef } from 'react';
-import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
 import Select from 'react-select';
 import { SelectOption } from 'types/SelectOption';
 import { Country } from 'types/Country';

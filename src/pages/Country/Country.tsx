@@ -8,7 +8,7 @@ import { AlphabetizedList } from 'components/Molecules/AlphabetizedList/Alphabet
 import { Spinner } from 'components/Atoms/Spinner/Spinner';
 import { ErrorLayout } from 'components/layouts/ErrorLayout/ErrorLayout';
 
-export const Country: FC<RouteComponentProps<{ countryName: string }>> = ({ match }) => {
+const Country: FC<RouteComponentProps<{ countryName: string }>> = ({ match }) => {
   const countries = useCountriesResource();
 
   if (isLoading(countries)) {
@@ -33,3 +33,5 @@ export const Country: FC<RouteComponentProps<{ countryName: string }>> = ({ matc
 
   return <AlphabetizedList title={country.country} data={grouped} path="/weather" />;
 };
+
+export default Country;

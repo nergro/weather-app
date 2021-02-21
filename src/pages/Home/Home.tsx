@@ -6,7 +6,7 @@ import { useCurrentLocation } from 'services/useCurrentLocation';
 import { Weather } from 'types/Weather';
 import { WeatherLayout } from 'components/layouts/WeatherLayout/WeatherLayout';
 
-export const Home: FC = () => {
+const Home: FC = () => {
   const countries = useCountriesResource();
   const coordinates = useCurrentLocation();
   const { getWeatherByCoordinates } = useWeatherResource();
@@ -26,3 +26,5 @@ export const Home: FC = () => {
     />
   );
 };
+
+export default Home;
