@@ -4,7 +4,7 @@ import { Weather } from 'types/Weather';
 
 const APP_ID = '7bb0d6bdf42e4414f90523ce62b83b5c';
 
-const url = 'http://api.openweathermap.org/data/2.5/weather';
+const url = 'https://api.openweathermap.org/data/2.5/weather';
 
 export const getWeatherDataByCity = async (city: string): Promise<Weather> => {
   const weather = await axios.get<Weather>(url, {
