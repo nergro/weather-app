@@ -14,7 +14,6 @@ export const reducer = (state: State, action: Action): State => {
       return { ...state, [action.payload.id]: action.payload.error };
     }
     default: {
-      const _ignore: never = action; // check if all cases are handled
       return state;
     }
   }

@@ -14,7 +14,6 @@ export const reducer = (state: State, action: Action): State => {
       return action.payload;
     }
     default: {
-      const _ignore: never = action; // check if all cases are handled
       return state;
     }
   }
