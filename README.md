@@ -1,6 +1,8 @@
 Weather app
 ====================================
-Single page application made with React, TypeScript, SCSS [DEMO](https://orai.gromas.lt/)
+Single page application made with React, TypeScript, SCSS 
+
+#### Demo can be found [here](https://orai.gromas.lt/)
 ### Getting up & running
 
 Both the server and client need to be installed and started.
