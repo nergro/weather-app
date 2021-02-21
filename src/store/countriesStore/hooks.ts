@@ -25,6 +25,7 @@ export const useDispatch = (): Dispatch<Action> => {
 export const useCountriesResource = (): Resource<Country[]> => {
   const state = useState();
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (!state) {
       dispatch({ type: 'Countries/LoadInitiated' });

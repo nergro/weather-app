@@ -1,12 +1,9 @@
-.currentDateContainer {
-
-}
-
 .currentDate {
   font-size: 20px;
   color: rgba(0,0,0,0.9);
   margin: 0;
-  &> span {
+
+  & > span {
     font-weight: 700;
     font-size: 22px;
   }

@@ -5,34 +5,6 @@
   max-width: 1000px;
 }
 
-.weatherlocation {
-  display: flex;
-  flex-direction: column;
-
-  .weatherlocationName {
-    display: flex;
-    align-items: center;
-
-    & > p {
-    font-size: 25px;
-    font-weight: 700;
-    }
-
-    &--heartIcon {
-      width: 25px;
-      height: 25px;
-      margin-left: 20px;
-      cursor: pointer;
-      fill: #000000;
-      transition: all 0.3s ease;
-      
-      &__fill {
-        fill: #ff1b1b;
-      }
-    }
-  }
-}
-
 .weather {
   display: flex;
   align-items: center;
@@ -44,6 +16,7 @@
   }
 
   &__imageContainer {
+    
     @media (min-width: $breakpoint-tablet) {
       width: 33%;
     }
@@ -67,8 +40,10 @@
     @media (min-width: $breakpoint-tablet) {
       width: 33%;
     }
+
     display: flex;
     justify-content: center;
+
     & > p {
       font-size: 30px;
     }
@@ -76,6 +51,7 @@
 
 
   &__info {
+
     @media (min-width: $breakpoint-tablet) {
       width: 33%;
     }

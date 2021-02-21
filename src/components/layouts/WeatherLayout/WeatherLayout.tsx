@@ -44,9 +44,7 @@ export const WeatherLayout: FC<Props> = ({ countries, weatherData, currentLocati
     );
   }
 
-  const weatherCoords: Coordinates | undefined = weatherData ? { ...weatherData.coord } : undefined;
-
-  const coordinates: Coordinates | undefined = currentLocation || weatherCoords;
+  const coordinates = currentLocation || (weatherData ? { ...weatherData.coord } : undefined);
 
   return (
     <div className="weatherLayout">

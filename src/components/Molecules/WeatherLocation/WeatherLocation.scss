@@ -1,0 +1,27 @@
+.weatherlocation {
+  display: flex;
+  flex-direction: column;
+
+  .weatherlocationName {
+    display: flex;
+    align-items: center;
+
+    & > p {
+      font-size: 25px;
+      font-weight: 700;
+    }
+
+    &--heartIcon {
+      width: 25px;
+      height: 25px;
+      margin-left: 20px;
+      cursor: pointer;
+      fill: #000000;
+      transition: all 0.3s ease;
+      
+      &__fill {
+        fill: #ff1b1b;
+      }
+    }
+  }
+}
