@@ -58,7 +58,7 @@ export const WeatherInfo: FC<Props> = ({ data }) => {
             <span>Humidity:</span> {data.main.humidity} %
           </p>
           <p className="weather__info--row">
-            <span>Wind speed:</span> {data.wind.speed} mps
+            <span>Average wind speed:</span> {data.wind.speed} m/s
           </p>
         </div>
       </div>

@@ -18,5 +18,11 @@ export const Home: FC = () => {
     }
   }, [coordinates, getWeatherByCoordinates]);
 
-  return <WeatherLayout countries={countries} weatherData={weatherData} />;
+  return (
+    <WeatherLayout
+      countries={countries}
+      weatherData={weatherData}
+      currentLocation={coordinates !== 'error' ? coordinates : undefined}
+    />
+  );
 };

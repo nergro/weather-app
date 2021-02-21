@@ -7,13 +7,15 @@ import { isLoading, Resource } from 'store/types';
 import { Country } from 'types/Country';
 import { Weather } from 'types/Weather';
 import { Spinner } from 'components/Atoms/Spinner/Spinner';
-
+import { WeatherMap } from 'components/Organisms/WeatherMap/WeatherMap';
+import { Coordinates } from 'types/Coordinates';
 interface Props {
   countries: Resource<Country[]>;
   weatherData: Resource<Weather> | undefined;
+  currentLocation?: Coordinates;
 }
 
-export const WeatherLayout: FC<Props> = ({ countries, weatherData }) => {
+export const WeatherLayout: FC<Props> = ({ countries, weatherData, currentLocation }) => {
   const { push } = useHistory();
 
   if (isLoading(countries)) {
@@ -37,10 +39,15 @@ export const WeatherLayout: FC<Props> = ({ countries, weatherData }) => {
     );
   }
 
+  const weatherCoords: Coordinates | undefined = weatherData ? { ...weatherData.coord } : undefined;
+
+  const coordinates: Coordinates | undefined = currentLocation || weatherCoords;
+
   return (
     <div className="weatherLayout">
       <Search countries={countries} onChange={(option) => push(`/weather/${option}`)} />
       {weatherData && <WeatherInfo data={weatherData} />}
+      {coordinates && <WeatherMap coordinates={coordinates} />}
     </div>
   );
 };

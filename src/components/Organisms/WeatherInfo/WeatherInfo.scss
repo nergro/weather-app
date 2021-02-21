@@ -3,7 +3,6 @@
   flex-direction: column;
   width: 90%;
   max-width: 1000px;
-  padding-bottom: 800px;
 }
 
 .weatherlocation {
@@ -88,7 +87,7 @@
     font-weight: 500;
 
     &--row {
-      width: 200px;
+      width: 250px;
       display: flex;
       justify-content: space-between;
     }
