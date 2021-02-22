@@ -14,8 +14,8 @@ export const AlphabetizedList: FC<Props> = ({ title, data, path }) => {
     <div className="alphabetizedListContainer">
       <h1>{title}</h1>
       <div className="alphabetizedList">
-        {alphabet.map((letter) => (
-          <DataGroup key={letter} data={data[letter]} path={path} />
+        {alphabet.map((letter, i) => (
+          <DataGroup key={letter + i} data={data[letter]} path={path} />
         ))}
       </div>
     </div>
