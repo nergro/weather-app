@@ -16,8 +16,8 @@ export const DataGroup: FC<Props> = ({ data, path }) => {
     <div className="dataGroup">
       <p className="dataGroupName">{data.group}</p>
       <ul className="dataGroupList">
-        {data.children.map((x) => (
-          <li key={x} className="dataGroupListItem">
+        {data.children.map((x, i) => (
+          <li key={x + i} className="dataGroupListItem">
             <Link to={`${path}/${x}`}>{x}</Link>
           </li>
         ))}

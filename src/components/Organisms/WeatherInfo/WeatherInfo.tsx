@@ -27,7 +27,7 @@ export const WeatherInfo: FC<Props> = ({ data }) => {
       <WeatherLocation name={data.name} timezone={data.timezone} />
       <div className="weather">
         <div className="weather__imageContainer">
-          <img src={getWeatherIconUrl(weatherIconData.icon)} />
+          <img src={getWeatherIconUrl(weatherIconData.icon)} alt={weatherIconData.description} />
           <p>
             {weatherIconData.description.charAt(0).toUpperCase() +
               weatherIconData.description.slice(1)}

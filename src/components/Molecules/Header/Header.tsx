@@ -10,15 +10,13 @@ const links = [
 export const Header: FC = () => {
   return (
     <header className="header">
-      <ul className="linkList">
+      <nav className="linkList">
         {links.map((x) => (
-          <li key={x.name} className="linkList__item">
-            <Link to={x.to} className="linkList__item--link">
-              {x.name}
-            </Link>
-          </li>
+          <Link key={x.name} to={x.to} className="linkList__link">
+            {x.name}
+          </Link>
         ))}
-      </ul>
+      </nav>
     </header>
   );
 };

@@ -1,4 +1,4 @@
-const url = 'http://openweathermap.org/img/wn';
+const url = 'https://openweathermap.org/img/wn';
 
 type IconSize = '2' | '4';
 
